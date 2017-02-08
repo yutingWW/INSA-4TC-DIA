@@ -4,6 +4,7 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.Enumeration;
 import java.util.concurrent.*;
 
 
@@ -42,25 +43,29 @@ public class TD1Server {
                      String command = r.readLine();
 
                      if (command.startsWith("KEYS")) {
-                         database.keySet().forEach((key) -> {
-                             try {
-                                 w.write(key + "\n");
-                             } catch (IOException e) {
-                                 e.printStackTrace();
-                             }
-                         });
+                         System.out.println("received keys");
+
+                         Enumeration<String> keys = database.keys();
+                         while (keys.hasMoreElements()) {
+                             w.write(keys.nextElement() + "\n");
+                         }
+                         w.write("--------------------------\n");
+
                      } else if (command.startsWith("PUT")) {
                          try {
                              String[] put_command = command.split(" ");
                              int datalength = Integer.parseInt(put_command[2]);
                              System.out.println("Datalength: " + datalength);
-                             String put_data = r.readLine().substring(0, datalength);
+                             String put_data = "";
+                             for (int i = 0; i<datalength; i++) {
+                                 put_data += (char) r.read();
+                             }
                              System.out.println("DATA: " + put_data);
 
                              database.put(put_command[1], put_data);
                              w.write("OK\n");
-                         } catch (Exception e){
-                             w.write("ERROR | PUT COMMAND MALFORMED\n");
+                         } catch (ArrayIndexOutOfBoundsException e){
+                            w.write("ERROR | PUT COMMAND MALFORMED\n");
                          }
                      } else if (command.startsWith("DEL")) {
                         try {

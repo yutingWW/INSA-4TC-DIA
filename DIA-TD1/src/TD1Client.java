@@ -21,9 +21,11 @@ public class TD1Client {
 
         w.write(request);
         w.flush();
-        String response = r.readLine();
 
-        System.out.println(response);
+        while (true) {
+            String response = r.readLine();
+            System.out.println(response);
+        }
     }
 
 }
