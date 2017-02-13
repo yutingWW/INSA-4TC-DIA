@@ -19,7 +19,7 @@ public class Server implements Runnable{
 
     public static void main(String args[]){
         try {
-            new Server(DEFAULT_PORT);
+            new Server(DEFAULT_PORT).start();
         } catch (IOException e){
             e.printStackTrace();
         }

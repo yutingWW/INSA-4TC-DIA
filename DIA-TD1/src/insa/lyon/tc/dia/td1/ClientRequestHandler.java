@@ -41,9 +41,10 @@ public class ClientRequestHandler implements Runnable {
                     Enumeration<String> keys = server.getKeys();
 
                     while (keys.hasMoreElements()) {
-                        writer.write(keys.nextElement() + "\n");
+                        writer.write(String.valueOf(keys.nextElement() + "\n"));
                     }
-                    writer.write("--------------------------\n");
+
+                    writer.write(String.valueOf("--------------------------\n"));
 
                 } else if (command.startsWith("PUT")) {
 
@@ -56,23 +57,23 @@ public class ClientRequestHandler implements Runnable {
                     System.out.println("DATA: " + put_data);
 
                     server.putData(parsedCommand[1], put_data);
-                    writer.write("OK\n");
+                    writer.write("OK\n",0,3);
 
                 } else if (command.startsWith("DEL")) {
 
                     server.delData(parsedCommand[1]);
-                    writer.write("OK\n");
+                    writer.write("OK\n",0,3);
 
                 } else if (command.startsWith("GET")) {
 
                     String _data = server.getData(parsedCommand[1]);
                     String _length = Integer.toString(_data.length());
 
-                    writer.write(_length + "\n");
-                    writer.write(_data + "\n");
+                    writer.write(_length + "\n",0,_length.length()+1);
+                    writer.write(_data + "\n",0,_data.length()+1);
 
                 } else {
-                    writer.write("Please enter a valid command.\n");
+                    writer.write(String.valueOf("Please enter a valid command.\n"));
                 }
 
                 writer.flush();

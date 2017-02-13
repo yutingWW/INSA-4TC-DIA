@@ -6,12 +6,14 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by cajus on 12/02/17.
  */
 public class Client {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         InetAddress ip = InetAddress.getByName(args[0]);
         int port = Integer.parseInt(args[1]);
@@ -33,15 +35,16 @@ public class Client {
                 return;
             } else if (userInput.startsWith("PUT")) {
                 userInput += userInputReader.readLine();
-            } else {
-                writer.write(userInput);
             }
 
+            writer.write(userInput);
             writer.flush();
+
+            sleep(1000);
 
             String output = "";
             while (reader.ready()){
-                output += reader.read();
+                output += (char) reader.read();
             }
             System.out.println(output);
 
