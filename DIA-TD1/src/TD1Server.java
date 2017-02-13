@@ -85,7 +85,7 @@ public class TD1Server {
                              w.write(get_returnlength + "\n");
                              w.write(get_returndata + "\n");
                          } catch (Exception e) {
-                             w.write("ERROR | DEL COMMAND MALFORMED\n");
+                             w.write("ERROR | GET COMMAND MALFORMED\n");
                          }
                      }
 
