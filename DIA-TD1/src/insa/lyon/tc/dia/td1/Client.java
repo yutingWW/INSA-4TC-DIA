@@ -46,7 +46,7 @@ public class Client {
             while (reader.ready()){
                 output += (char) reader.read();
             }
-            System.out.println(output);
+            System.out.print(output);
 
         }
 

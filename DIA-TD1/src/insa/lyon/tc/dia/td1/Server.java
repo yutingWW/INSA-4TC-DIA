@@ -1,7 +1,6 @@
 package insa.lyon.tc.dia.td1;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.util.Enumeration;
 import java.util.concurrent.*;
