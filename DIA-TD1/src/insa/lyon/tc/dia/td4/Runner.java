@@ -10,7 +10,7 @@ public class Runner {
 
     private final static int THREAD_COUNT = 4;
     private final static int JOB_COUNT = 5000000;
-    private final static int STORE_SIZE = 20;
+    private final static int STORE_SIZE = 200;
 
     private final ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
     private final LinkedList<Callable<Void>> jobs = new LinkedList<>();
@@ -55,13 +55,19 @@ public class Runner {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Runner runner = new Runner();
-        for (int i = 0; i < 2; i++) {
-            runner.bench(new HippieStore(STORE_SIZE));
-        }
+
+//        for (int i = 0; i < 2; i++) {
+//            runner.bench(new HippieStore(STORE_SIZE));
+//        }
 
         for (int i = 0; i < 2; i++) {
             runner.bench(new MerkelStore(STORE_SIZE));
         }
+
+        for (int i = 0; i<2; i++) {
+            runner.bench(new AtomicStore(STORE_SIZE));
+        }
+        return;
     }
 
 
