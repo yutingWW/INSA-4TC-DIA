@@ -9,8 +9,8 @@ import java.util.concurrent.*;
 public class Runner {
 
     private final static int THREAD_COUNT = 4;
-    private final static int JOB_COUNT = 5000000;
-    private final static int STORE_SIZE = 200;
+    private final static int JOB_COUNT = 50000;
+    private final static int STORE_SIZE = 20;
 
     private final ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
     private final LinkedList<Callable<Void>> jobs = new LinkedList<>();
@@ -67,7 +67,6 @@ public class Runner {
         for (int i = 0; i<2; i++) {
             runner.bench(new AtomicStore(STORE_SIZE));
         }
-        return;
     }
 
 
